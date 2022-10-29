@@ -1,5 +1,7 @@
 package projectpackage;
 
+//Write a Program to accept P, R & no. of years from User and calculate simple Interest?
+
 import java.util.Scanner;  // Import the Scanner class
 
 public class AreaofCircle {
