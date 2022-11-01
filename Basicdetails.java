@@ -13,8 +13,8 @@ public class Basicdetails {
         int user_no;
         String user_address;
         String user_gender;
-        double user_per;
-        char user_gmail;
+        Float user_per;
+        String user_gmail;
         
         Scanner sc=new Scanner(System.in);
         
@@ -24,17 +24,25 @@ public class Basicdetails {
         System.out.println("Enter Yoour Contact no:");
         user_no = sc.nextInt();
         
-       System.out.println("Enter Your Address");
-       user_address = sc.next();
+        System.out.println("Enter Your Address");
+        user_address = sc.next();
        
-      System.out.println("Enter Your Gender");
-      user_gender = sc.next();
+        System.out.println("Enter Your Gender");
+        user_gender = sc.next();
       
-      System.out.println("Enter Your Percentage");
-      user_per = sc.nextDouble();
+        System.out.println("Enter Your Percentage");
+        user_per = sc.nextFloat();
       
-      System.out.println("Enter Your Gmail");
-      user_gmail = sc.next().charAt(0);
+        System.out.println("Enter Your Gmail");
+        user_gmail = sc.next();
+	
+	System.out.println("Your Name : " + user_name );
+        System.out.println("Your Contact no : " + user_no );
+        System.out.println("Your Address : " + user_address );
+        System.out.println("Your Gender : " + user_gender );
+        System.out.println("Your Percentage : " + user_per );
+        System.out.println("Your Gmail : " + user_gmail );
+	}
 	}
 
 }
