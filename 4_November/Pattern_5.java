@@ -1,7 +1,7 @@
 package projectpackage;
 
 /*Write a program to display the following pattern
-   *         	
+    *         	
    ***		
   *****		
  *******		
