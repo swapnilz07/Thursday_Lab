@@ -1,0 +1,87 @@
+/*
+	
+	Q2. WAP to accept back name, AC NO, Name , Pin no , amount for Debit or Credit. 
+	    And display the Details. AS Name, bank name,Final balance.
+
+
+*/
+
+package homework_bank;
+
+import java.util.Scanner;
+
+public class bank_oprtn {
+	private int ac_no,pin_no,balance;
+	String u_name,B_name;
+	Scanner sc=new Scanner(System.in);
+	public void set_ac_no(int newval) // setter method for set value
+	{
+		ac_no=newval;
+	}
+	public int get_ac_no()	//getter method for getting value
+	{
+		return ac_no;
+	}
+	public int getPin_no() {
+		return pin_no;
+	}
+	public void setPin_no(int newval) {
+		pin_no = newval;
+	}
+	public int getBalance() {
+		return balance;
+	}
+	public void setBalance(int newval) {
+		balance = newval;
+	}
+	
+	public void calc_opr(int cal_Amt,int ch)
+	{
+		if(ch==1)
+		{
+			balance=balance-cal_Amt;
+		}
+		else
+		{
+			balance=balance+cal_Amt;
+		}
+		
+	}
+}
+--------------------------------
+
+package homework_bank;
+
+public class Bank extends bank_oprtn
+{
+
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+	}
+	public void accept()
+	{
+		System.out.println("Enter your name");
+		u_name=sc.next();
+		System.out.println("Enter Your bank name");
+		B_name=sc.next();
+		System.out.println("Enter your acount number");
+		set_ac_no(sc.nextInt());
+		System.out.println("Enter your account pin");
+		setPin_no(sc.nextInt());
+		System.out.println("Enter your choice\n 1:Debit \n 2:Credit");
+		int ch=sc.nextInt();
+		System.out.println("Enter your amount");
+		int amt=sc.nextInt();
+		calc_opr(amt,ch);
+	}
+	public void disp()
+	{
+		System.out.println("Welcome :"+u_name);
+		System.out.println("To "+B_name);
+		System.out.println("Your Accounbt number is ="+get_ac_no());
+		System.out.println("Your pin is ="+getPin_no());
+		System.out.println("Your balance is ="+getBalance());
+	}
+}
