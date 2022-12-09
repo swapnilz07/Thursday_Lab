@@ -1,0 +1,111 @@
+package homework;
+
+/*WAP to display prime no between 1 to 1000, armstrongno between 1 to 1000 ,
+accept a number from the user and then outputs the number with the digits reversed. 
+For example, if the input is 12345, the output should be 54321. 
+using (Abstraction , Interface)*/
+
+public abstract class Prime_armstrong_revno 
+{
+     public abstract void demo();
+    
+    	 public void prime()
+    	 {
+    		 
+    	 }
+     
+    public abstract void arm_no();
+    
+         public void arm()
+         {
+        	 
+         }
+}
+
+-------------------------------
+
+package homework;
+
+import java.util.Scanner;
+
+public class useofabs extends Prime_armstrong_revno implements rev_no
+{
+
+	public static void main(String[] args)
+	{
+		// TODO Auto-generated method stub
+        useofabs obj=new useofabs();
+        obj.demo();
+        obj.arm_no();
+        obj.reversed();
+	}
+
+	@Override
+	public void demo() {
+		// TODO Auto-generated method stub
+		int i , j, c=0 ;
+		System.out.println("Prime number between 1 to 1000 Are : ");
+
+		for( i=1 ; i<=1000; i++)
+		{
+		for( j=1 ; j<=i ; j++)
+		{
+		if ( i%j ==0)
+			c++;
+		}
+		if ( c==2)
+		System.out.println( + i);
+			c=0;
+
+		}
+	}
+
+	@Override
+	public void arm_no() 
+	{
+		// TODO Auto-generated method stub
+		 int n; 
+		 System.out.println("Armstrong Numbers from 1 to 1000:");
+	  
+	      for (int i = 1; i<=1000; i++)
+	      {
+	         int check, rem, sum = 0;
+	         check = i;
+	         while(check != 0) {
+	            rem = check % 10;
+	            sum = sum + (rem * rem * rem);
+	            check = check / 10;
+	         }
+	         if(sum == i)
+	         {
+	        	 System.out.println(i+"");
+	         }
+	     }
+	}
+
+
+	@Override
+	public void reversed() {
+		// TODO Auto-generated method stub
+		int m, n, sum = 0;
+        Scanner s = new Scanner(System.in);
+        System.out.print("Enter the number to be reversed :");
+        m = s.nextInt();
+        while(m > 0)
+        {
+            n = m % 10;
+            sum = sum * 10 + n;
+            m = m / 10;
+        }
+        System.out.println("Reverse:"+sum);
+	}
+
+}
+
+------------------------------------
+package homework;
+
+public interface rev_no 
+{
+    public void reversed();
+}
