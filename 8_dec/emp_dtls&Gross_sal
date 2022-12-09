@@ -1,0 +1,74 @@
+package projectpackage;
+
+/*Q1)WAP  to create a process which will store the employee details and calculate the employee gross salary and net salary.
+(Using Inheritance)*/
+
+
+import java.util.Scanner;
+
+public class emp_dtls 
+{
+      int emp_id,emp_no,emp_age;
+      String emp_name ,emp_add, emp_email ;
+      float emp_netsal,gross_sal,tax,pf;
+      
+      Scanner sc=new Scanner(System.in);
+      
+      public void accept()
+      {
+    	 System.out.println("Enter Employee Id :");
+    	 emp_id = sc.nextInt();
+    	 System.out.println("Enter Employee Name : ");
+    	 emp_name =sc.next();
+    	 System.out.println("Enter Employee age :");
+    	 emp_age=sc.nextInt();
+    	 System.out.println("Enter Employee Email Address :");
+    	 emp_email=sc.next();
+    	 System.out.println("Enter Employe Contact Number :");
+    	 emp_no=sc.nextInt();
+    	 System.out.println("Enter Employee Address :");
+    	 emp_add=sc.next();
+    	 System.out.println("Enter Employee Salary :");
+    	 emp_netsal=sc.nextFloat();
+      }
+           
+}
+
+------------------------------------
+
+package projectpackage;
+
+public class Calc extends emp_dtls{
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+        Calc obj=new Calc();
+        obj.accept();
+        obj.disp();
+        obj.gross_salary();
+        
+	}
+
+	public void disp()
+	{
+		System.out.println("Enter Employee Id :"+emp_id);
+		System.out.println("Enter Employee name :"+emp_name);
+		System.out.println("Enter Employee Age :"+emp_age);
+		System.out.println("Enter Employee Email Address :"+emp_email);
+		System.out.println("Enter Employee Contact Number :"+emp_no);
+		System.out.println("Enter Employee Address :"+emp_add);
+		System.out.println("Enter Employee  :"+ emp_netsal+"/month");
+		
+	}
+	
+	public void gross_salary()
+	{
+		tax= 18*emp_netsal/100;
+		pf = 5*emp_netsal/100;
+		
+		gross_sal = emp_netsal + tax + pf;
+		System.out.println("Employees Gross Salary is :"+gross_sal);
+		
+	}
+}
+
