@@ -1,0 +1,78 @@
+package HW_std_grade;
+
+//WAP to create an user defined exception for the grade of a student
+
+public class useof_exception extends Exception
+{
+	 useof_exception(String MSG)
+	  {
+	      // calling the constructor of parent Exception  
+	      super(MSG);   
+	  }
+}
+
+-----------------------------------------------------
+
+package HW_std_grade;
+
+import java.util.Scanner;
+
+public class stud_grade
+{
+
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+        try
+        {
+         	grade();
+        }
+        catch(useof_exception e)
+        {
+        	System.out.println(e.getMessage());
+        }
+		
+	}
+    
+	public static void grade() throws useof_exception
+	{
+		String stud_name;
+		int per,roll_no,total_marks = 0,i;
+		int []marks=new int[5];
+		
+		
+		
+		Scanner sc= new Scanner(System.in);
+		
+		System.out.println("Enter your name");
+		stud_name=sc.next();
+		System.out.println("Enter your Roll number");
+		roll_no=sc.nextInt();
+
+		System.out.println("Enter marks of five subject");
+
+		for(i = 0;i<5;i++)
+		{
+			marks[i]=sc.nextInt();
+			total_marks+=marks[i];
+		}
+		
+		System.out.println("The total out of 500 is ="+total_marks);
+	
+		per=(total_marks*100)/500;
+		
+		System.out.println("You got "+per+"%");
+		
+		
+		if(per>100)
+		{
+			//System.out.println("The Percentage Should not be greater than 100%.");
+			throw new useof_exception("The Percentage Should not be greater than 100%.");
+		}else if(per>=35 || per<=100)
+		{
+			System.out.println("You Are Passed The Examination");
+		}else
+		   System.out.println("You Are Fail In The Examination");
+		
+	}
+}
