@@ -1,17 +1,19 @@
 package HW_std_grade;
 
-//WAP to create an user defined exception for the grade of a student
+//WAP to create an user defined exception for the grade of a student?
+
+//Create a constructor superclass
 
 public class useof_exception extends Exception
 {
-	 useof_exception(String MSG)
+	 useof_exception(String MSG)        
 	  {
 	      // calling the constructor of parent Exception  
 	      super(MSG);   
 	  }
 }
 
------------------------------------------------------
+---------------------------------
 
 package HW_std_grade;
 
@@ -34,7 +36,7 @@ public class stud_grade
 		
 	}
     
-	public static void grade() throws useof_exception
+	public static void grade() throws useof_exception     //define a signature of exception
 	{
 		String stud_name;
 		int per,roll_no,total_marks = 0,i;
@@ -51,7 +53,7 @@ public class stud_grade
 
 		System.out.println("Enter marks of five subject");
 
-		for(i = 0;i<5;i++)
+		for(i = 0;i<5;i++)        //to accept a marks of 5 subject and to add those marks.
 		{
 			marks[i]=sc.nextInt();
 			total_marks+=marks[i];
@@ -66,8 +68,7 @@ public class stud_grade
 		
 		if(per>100)
 		{
-			//System.out.println("The Percentage Should not be greater than 100%.");
-			throw new useof_exception("The Percentage Should not be greater than 100%.");
+			throw new useof_exception("The Percentage Should not be greater than 100%."); //userdefined exception
 		}else if(per>=35 || per<=100)
 		{
 			System.out.println("You Are Passed The Examination");
