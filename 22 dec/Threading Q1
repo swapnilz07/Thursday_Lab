@@ -3,7 +3,7 @@
  the message continuously  till the user presses any key */
 
 
-package ranjeet;
+package Multithreading;
 
 public class Message extends Thread {
 String str; 
