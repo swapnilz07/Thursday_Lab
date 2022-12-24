@@ -1,0 +1,35 @@
+/*Write a program that creates 2 threads each displaying a message pass
+ message as a parameter to the constructor the threads should display
+ the message continuously  till the user presses any key */
+
+
+package ranjeet;
+
+public class Message extends Thread {
+String str; 
+
+ public static void main(String[] args) {
+	Message obj=new Message(" hiii i am dipanshu"); //message passing 
+	obj.start();
+        Message obj1=new Message(" hiii Frome dipanshu");   //message passing 
+	obj1.start();
+
+
+}
+
+public Message(String str) { //parameterised string
+	this.str=str; 
+	
+}
+public void run() {
+	
+		try { // Exception statement written inside try block 
+			while(true) { //infinite loop 
+				System.out.println(str); 
+		}
+		}
+		catch(Exception ex) { // After exception come try block break and come to catch block
+			System.out.println(ex.getMessage()); 
+		}
+}
+}
