@@ -1,0 +1,349 @@
+package JDBC;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class operations 
+{
+	public static void main(String[] args) 
+	{
+		
+		int count=0;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Select the number to do Operations: "+"\n"+" 1. To Insert Data into the table"+"\n"+" 2. To Update Existing data in the table"+"\n"+" 3. To Delete the Existing data in the table"+"\n"+" 4. To see The table");
+		System.out.println("Enter the number to select the operation : ");
+		count=sc.nextInt();
+		switch(count)
+		{
+		case 1:
+			insert_data();
+			break;
+		case 2:
+			 update_table();
+			break;
+		case 3:
+			delete_opr();
+			break;
+		case 4:
+			show_table();
+			break;
+		}
+	}
+	public static void create_database()
+	{
+		try
+		{
+			String que="create database Swap_finance";
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root", "root");
+		PreparedStatement st=con.prepareStatement(que);
+		st.execute();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	public static void show_database()
+	{
+		try
+		{
+			String que="show databases;";
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root", "root");
+		PreparedStatement st=con.prepareStatement(que);
+		ResultSet rs=st.executeQuery();
+		while(rs.next())
+		{
+			System.out.println(rs.getString(1));
+		}
+		
+		
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	public static void create_table()
+	{
+		try 
+		{
+			String q="create table emp_table(emp_id int(20) primary key, first_name varchar(200) not null, last_name varchar(200) not null, emp_email varchar(200), emp_department varchar(200), emp_designation varchar(200));";
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Swap_finance", "root", "root");
+			PreparedStatement st=con.prepareStatement(q);
+			st.executeUpdate();
+			System.out.println("Table Created in Swap_finance Database ");
+			
+			
+		} catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void insert_data()
+	{
+		try
+		{
+		String que="Insert into emp_table(emp_id, first_name, last_name, emp_email, emp_department, emp_designation)values(?, ?, ?, ?, ?, ?)";
+		String firstname,lastname,gmail,department,designation;
+		int emp_id;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Your Employee Id : ");
+		emp_id=sc.nextInt();
+		System.out.println("Enter Your First Name : ");
+		firstname=sc.next();
+		System.out.println("Enter Your Last Name : ");
+		lastname=sc.next();
+		System.out.println("Enter Your Email Id : ");
+		gmail=sc.next();
+		System.out.println("Enter Your Department : ");
+		department=sc.next();
+		System.out.println("Enter Your Designation : ");
+		designation=sc.nextLine();
+		designation+=sc.nextLine();
+        sc.close();
+		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Swap_finance", "root", "root");
+		PreparedStatement st=con.prepareStatement(que);
+		
+		st.setInt(1, emp_id);
+		st.setString(2, firstname);
+		st.setString(3, lastname);
+		st.setString(4, gmail);
+		st.setString(5, department);
+		st.setString(6,designation);
+		
+
+		int count=st.executeUpdate();
+		
+		if(count>0)
+		{
+			System.out.println("Your Data Inserted Successfully.");
+		}
+		con.close();
+			
+		} catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void show_table()
+	{
+
+		try 
+		{
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Swap_finance", "root", "root");
+		Statement st=con.createStatement();
+		ResultSet rs=st.executeQuery("select * from emp_table");
+		System.out.println("Employee Id \t First Name \t Last name \t Gmail \t \t Department \t Designation");
+		
+		while(rs.next())
+		{
+			System.out.println(rs.getInt(1)+"\t"+"\t"+rs.getString(2)+"\t"+"\t"+rs.getString(3)+"\t"+"\t"+rs.getString(4)+"\t"+rs.getString(5)+"\t"+rs.getString(6));
+		}
+		con.close();
+		} catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void update_table()
+	{
+		System.out.println("Select the number to make changes : "+"\n"+" 1. First name"+"\n"+" 2. Last name"+"\n"+" 3. Email"+"\n"+" 4. Department"+"\n"+" 5. Designation");
+	
+		int count=0;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the number to make the changes in table :");
+		count=sc.nextInt();
+		switch(count)
+		{
+		case 1:
+			try
+			{
+				String q="Update emp_table set first_name=? where emp_id=?";
+				
+				System.out.println("Enter Your New Name : ");
+				String name=sc.next();
+			    name+=sc.nextLine();
+		       
+		        System.out.println("Enter Your Id : ");
+				int emp_id=sc.nextInt();
+				sc.close();
+				
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Swap_finance", "root", "root");
+			    PreparedStatement st=con.prepareStatement(q);
+			    
+			    st.setString(1, name);
+			    st.setInt(2, emp_id);
+			    st.executeUpdate();
+			    System.out.println("Your Updation in the Table is Done. :) ");
+			    con.close();
+			}
+			catch (Exception e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case 2:
+			try
+			{
+				String q="Update emp_table set last_name=? where emp_id=?";
+				
+				System.out.println("Enter Your New Last Name : ");
+				String last_name=sc.next();
+			    last_name+=sc.nextLine();
+		       
+		        System.out.println("Enter Your Id : ");
+				int emp_id=sc.nextInt();
+				sc.close();
+				
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Swap_finance", "root", "root");
+			    PreparedStatement st=con.prepareStatement(q);
+			    
+			    st.setString(1, last_name);
+			    st.setInt(2, emp_id);
+			    st.executeUpdate();
+			    System.out.println("Your Updation in the Table is Done. :) ");
+			    con.close();
+			}
+			catch (Exception e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case 3:
+			try
+			{
+				String q="Update emp_table set emp_email=? where emp_id=?";
+				
+				System.out.println("Enter Your New Email : ");
+				String emp_email=sc.next();
+			    emp_email+=sc.nextLine();
+		       
+		        System.out.println("Enter Your Id : ");
+				int emp_id=sc.nextInt();
+				sc.close();
+				
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Swap_finance", "root", "root");
+			    PreparedStatement st=con.prepareStatement(q);
+			    
+			    st.setString(1, emp_email);
+			    st.setInt(2, emp_id);
+			    st.executeUpdate();
+			    System.out.println("Your Updation in the Table is Done. :) ");
+			    con.close();
+			}
+			catch (Exception e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case 4:
+			try
+			{
+				String q="Update emp_table set emp_department=? where emp_id=?";
+				
+				
+				System.out.println("Enter Your New Designation : ");
+				String emp_department=sc.next();
+				emp_department+=sc.nextLine();
+		       
+		        System.out.println("Enter Your Id : ");
+				int emp_id=sc.nextInt();
+				sc.close();
+				
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Swap_finance", "root", "root");
+			    PreparedStatement st=con.prepareStatement(q);
+			    
+			    st.setString(1, emp_department);
+			    st.setInt(2, emp_id);
+			    st.executeUpdate();
+			    System.out.println("Your Updation in the Table is Done. :) ");
+			    con.close();
+			}
+			catch (Exception e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case 5:
+			try
+			{
+				String q="Update emp_table set emp_designation=? where emp_id=?";
+				
+				
+				System.out.println("Enter Your New Designation : ");
+				String emp_designation=sc.next();
+				emp_designation+=sc.nextLine();
+		       
+		        System.out.println("Enter Your Id : ");
+				int emp_id=sc.nextInt();
+				sc.close();
+				
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Swap_finance", "root", "root");
+			    PreparedStatement st=con.prepareStatement(q);
+			    
+			    st.setString(1, emp_designation);
+			    st.setInt(2, emp_id);
+			    st.executeUpdate();
+			    System.out.println("Your Updation in the Table is Done. :) ");
+			    con.close();
+			}
+			catch (Exception e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		}
+	}
+	public static void delete_opr()
+	{
+		try {
+			String q="delete from emp_table where emp_id=?";
+			
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Enetr Employee Id to delete the employees data : ");
+			int emp_id=sc.nextInt();
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Swap_finance", "root", "root");
+			PreparedStatement st=con.prepareStatement(q);
+			
+			st.setInt(1, emp_id) ;
+			
+			int count=st.executeUpdate();
+			
+			if(count>0)
+			{
+				System.out.println("Employee with Id = "+emp_id+" is deleted.");
+			}
+			con.close();
+			
+		    }
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
