@@ -17,5 +17,7 @@
  <a href="selectupdate.jsp">  <button >Update Data of Existing Table</button></a>
 <br/><br/>
 <a href="Delete.jsp"> <button>Delete Data from Existing Table</button></a>
+<br/><br/>
+<a href="select_row.jsp"> <button>select Data from Existing Table</button></a>
 </body>
 </html>
